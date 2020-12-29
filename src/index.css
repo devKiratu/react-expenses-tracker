@@ -1,13 +1,125 @@
-/* body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+body {
+	margin: 0;
+
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+		"Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+		sans-serif;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
-} */
+.app {
+	width: 50%;
+	margin: 30px auto;
+	text-align: center;
+	border: 1px solid #f7f7f7;
+	box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
+	min-height: 90vh;
+}
+
+.title {
+	margin: 20px;
+	font-size: x-large;
+}
+
+.btn-income {
+	padding: 10px;
+	margin: 20px 5px;
+	width: 40%;
+	border: 2px solid#2ecc71;
+	border-radius: 5px;
+	outline: none;
+	background: transparent;
+	color: #2ecc71;
+	font-size: medium;
+	box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
+	cursor: pointer;
+}
+
+.btn-expense {
+	padding: 10px;
+	margin: 20px 5px;
+	width: 40%;
+	border: 2px solid #e74c3c;
+	border-radius: 5px;
+	outline: none;
+	background: transparent;
+	color: #e74c3c;
+	font-size: medium;
+	box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
+	cursor: pointer;
+}
+
+.summary-card {
+	width: 80%;
+	margin: 20px auto;
+	border-radius: 5px;
+	box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
+	background-color: #fff;
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+}
+
+.card-income > p {
+	/* color: #2ecc71; */
+	margin: 2px;
+}
+.card-expenses > p {
+	/* color: #e74c3c; */
+	margin: 2px;
+}
+
+.divider {
+	border-right: 1px solid black;
+	line-height: 40px;
+}
+
+.your-balance {
+	width: 80%;
+	margin: 20px auto;
+	text-align: left;
+}
+
+.your-balance > p {
+	margin: 0;
+}
+
+.history-card {
+	width: 80%;
+	margin: 0 auto;
+}
+
+.history-card-title {
+	font-size: large;
+	text-align: left;
+	border-bottom: 1px solid #999;
+}
+.history-card-content {
+	height: 40vh;
+	overflow-y: auto;
+}
+
+.income-trans {
+	margin: 10px auto;
+	text-align: left;
+	display: flex;
+	justify-content: space-between;
+	box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
+	border-right: 5px solid #2ecc71;
+	padding: 0 5px;
+}
+.expense-trans {
+	margin: 10px auto;
+	text-align: left;
+	display: flex;
+	justify-content: space-between;
+	box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
+	border-right: 5px solid #e74c3c;
+	padding: 0 5px;
+}
+
+.expense-trans > p,
+.income-trans > p {
+	margin: 5px;
+}
