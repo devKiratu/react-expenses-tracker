@@ -2,21 +2,29 @@ import React, { useState } from "react";
 import AddTransaction from "./AddTransaction";
 import Balance from "./Balance";
 import History from "./History";
-import { AddIncome } from "./Transaction";
+import { AddIncome, AddExpense } from "./Transaction";
 
 import Title from "./Title";
 
 export default function App() {
-	const [isOpen, setIsOpen] = useState(false);
+	const [addIncome, setAddIncome] = useState(false);
+	const [addExpense, setAddExpense] = useState(false);
+
 	return (
 		<>
 			<div className="app">
 				<Title />
 				<Balance />
 				<History />
-				<AddTransaction isOpen={isOpen} setIsOpen={setIsOpen} />
+				<AddTransaction
+					addIncome={addIncome}
+					setAddIncome={setAddIncome}
+					addExpense={addExpense}
+					setAddExpense={setAddExpense}
+				/>
 			</div>
-			<AddIncome isOpen={isOpen} setIsOpen={setIsOpen} />
+			<AddIncome addIncome={addIncome} setAddIncome={setAddIncome} />
+			<AddExpense addExpense={addExpense} setAddExpense={setAddExpense} />
 		</>
 	);
 }
