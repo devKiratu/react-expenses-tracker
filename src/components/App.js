@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import AddTransaction from "./AddTransaction";
 import Balance from "./Balance";
 import History from "./History";
@@ -13,6 +13,22 @@ export default function App() {
 	const [totalIncome, setTotalIncome] = useState(0.0);
 	const [totalExpenses, setTotalExpenses] = useState(0.0);
 	const [balance, setBalance] = useState(0.0);
+
+	useEffect(() => {
+		setTotalExpenses(
+			transaction
+				.slice()
+				.filter((item) => item.type === "expense")
+				.reduce((acc, val) => acc + val.amount, 0)
+		);
+		setTotalIncome(
+			transaction
+				.slice()
+				.filter((item) => item.type === "income")
+				.reduce((acc, val) => acc + val.amount, 0)
+		);
+		setBalance(totalIncome - totalExpenses);
+	}, [transaction, totalExpenses, totalIncome]);
 
 	return (
 		<>
@@ -37,24 +53,12 @@ export default function App() {
 				setAddIncome={setAddIncome}
 				transaction={transaction}
 				setTransaction={setTransaction}
-				totalIncome={totalIncome}
-				setTotalIncome={setTotalIncome}
-				totalExpenses={totalExpenses}
-				setTotalExpenses={setTotalExpenses}
-				balance={balance}
-				setBalance={setBalance}
 			/>
 			<AddExpense
 				addExpense={addExpense}
 				setAddExpense={setAddExpense}
 				transaction={transaction}
 				setTransaction={setTransaction}
-				totalExpenses={totalExpenses}
-				setTotalExpenses={setTotalExpenses}
-				totalIncome={totalIncome}
-				setTotalIncome={setTotalIncome}
-				balance={balance}
-				setBalance={setBalance}
 			/>
 		</>
 	);

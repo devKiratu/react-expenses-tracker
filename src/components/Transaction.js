@@ -23,12 +23,6 @@ export function AddIncome({
 	setAddIncome,
 	transaction,
 	setTransaction,
-	totalIncome,
-	setTotalIncome,
-	totalExpenses,
-	setTotalExpenses,
-	balance,
-	setBalance,
 }) {
 	const [incomeName, setIncomeName] = useState("");
 	const [incomeAmount, setIncomeAmount] = useState("");
@@ -45,13 +39,6 @@ export function AddIncome({
 			},
 		]);
 
-		setTotalIncome(
-			transaction
-				.filter((item) => item.type === "income")
-				.reduce((acc, val) => acc + val.amount, 0)
-		);
-
-		setBalance(totalIncome - totalExpenses);
 		setIncomeName("");
 		setIncomeAmount("");
 	}
@@ -101,12 +88,6 @@ export function AddExpense({
 	setAddExpense,
 	transaction,
 	setTransaction,
-	totalExpenses,
-	setTotalExpenses,
-	totalIncome,
-	setTotalIncome,
-	balance,
-	setBalance,
 }) {
 	const [expenseName, setExpenseName] = useState("");
 	const [expenseAmount, setExpenseAmount] = useState("");
@@ -122,13 +103,6 @@ export function AddExpense({
 				id: Date.now(),
 			},
 		]);
-
-		setTotalExpenses(
-			transaction
-				.filter((item) => item.type === "expense")
-				.reduce((acc, val) => acc + val.amount, 0)
-		);
-		setBalance(totalIncome - totalExpenses);
 
 		setExpenseName("");
 		setExpenseAmount("");
