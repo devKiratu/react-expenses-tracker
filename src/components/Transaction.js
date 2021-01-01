@@ -72,7 +72,7 @@ export function AddIncome({
 							className="exit-modal"
 							onClick={() => setAddIncome(!addIncome)}
 						>
-							Exit
+							Finish
 						</button>
 					</div>
 				</div>
@@ -136,7 +136,7 @@ export function AddExpense({
 									backgroundColor: "#e74c3c",
 								}}
 							>
-								Add
+								Finish
 							</button>
 						</form>
 						<button
