@@ -13,12 +13,21 @@ body {
 }
 
 .app {
-	width: 50%;
+	width: 400px;
 	margin: 30px auto;
 	text-align: center;
 	border: 1px solid #f7f7f7;
 	box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
 	min-height: 90vh;
+	min-width: 250px;
+}
+@media (max-width: 400px) {
+	.app {
+		width: 100vw;
+	}
+	.modal-content {
+		width: 80vw;
+	}
 }
 
 .title {
@@ -141,14 +150,15 @@ body {
 }
 
 .modal-content {
-	width: 40%;
-	height: 60%;
+	width: 300px;
+	min-height: 60vh;
 	background-color: #fff;
 	padding: 20px;
 	text-align: center;
 	border-radius: 10px;
 	border: none;
 	box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
+	overflow: auto;
 }
 
 .modal-content > p {
@@ -172,10 +182,11 @@ form > input {
 	margin: 0 auto;
 	border-radius: 5px;
 	border: 1px solid #999;
+	outline: none;
 }
 
 form > input:focus {
-	border: 2px solid #2ecc71;
+	border: 2px solid black;
 }
 
 form > button {

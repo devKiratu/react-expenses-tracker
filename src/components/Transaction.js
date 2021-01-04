@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 
 export function IncomeTransaction({ name, amount }) {
 	return (
@@ -26,6 +26,7 @@ export function AddIncome({
 }) {
 	const [incomeName, setIncomeName] = useState("");
 	const [incomeAmount, setIncomeAmount] = useState("");
+	const inputIncome = useRef(null);
 
 	function handleSubmit(e) {
 		e.preventDefault();
@@ -41,7 +42,16 @@ export function AddIncome({
 
 		setIncomeName("");
 		setIncomeAmount("");
+		inputIncome.current.focus();
 	}
+
+	useEffect(() => {
+		if (addIncome) {
+			inputIncome.current.focus();
+		} else {
+			return;
+		}
+	}, [addIncome]);
 
 	return (
 		<>
@@ -57,6 +67,7 @@ export function AddIncome({
 								name="income"
 								value={incomeName}
 								onChange={(e) => setIncomeName(e.target.value)}
+								ref={inputIncome}
 							/>
 							<label htmlFor="amount">Amount</label>
 							<input
@@ -91,6 +102,7 @@ export function AddExpense({
 }) {
 	const [expenseName, setExpenseName] = useState("");
 	const [expenseAmount, setExpenseAmount] = useState("");
+	const inputExpense = useRef(null);
 
 	function handleSubmit(e) {
 		e.preventDefault();
@@ -106,7 +118,17 @@ export function AddExpense({
 
 		setExpenseName("");
 		setExpenseAmount("");
+		inputExpense.current.focus();
 	}
+
+	useEffect(() => {
+		if (addExpense) {
+			inputExpense.current.focus();
+		} else {
+			return;
+		}
+	}, [addExpense]);
+
 	return (
 		<>
 			{addExpense ? (
@@ -121,6 +143,7 @@ export function AddExpense({
 								name="expense"
 								value={expenseName}
 								onChange={(e) => setExpenseName(e.target.value)}
+								ref={inputExpense}
 							/>
 							<label htmlFor="amount">Amount</label>
 							<input
@@ -136,7 +159,7 @@ export function AddExpense({
 									backgroundColor: "#e74c3c",
 								}}
 							>
-								Finish
+								Add
 							</button>
 						</form>
 						<button
@@ -144,7 +167,7 @@ export function AddExpense({
 							style={{ border: "2px solid #e74c3c", color: "#e74c3c" }}
 							onClick={() => setAddExpense(!addExpense)}
 						>
-							Exit
+							Finish
 						</button>
 					</div>
 				</div>
