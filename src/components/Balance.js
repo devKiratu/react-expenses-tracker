@@ -10,20 +10,22 @@ export default function Balance({
 		<div>
 			<div className="your-balance">
 				<p>Your Balance</p>
-				<p style={{ fontSize: "x-large" }}>KES: {balance}</p>
+				<p style={{ fontSize: "x-large" }}>
+					KES: {new Intl.NumberFormat().format(balance)}
+				</p>
 			</div>
 			<div className="summary-card">
 				<div className="card-income">
 					<p>Income</p>
 					<p style={{ fontSize: "x-large", color: "#2ecc71" }}>
-						KES: {totalIncome}
+						KES: {new Intl.NumberFormat().format(totalIncome)}
 					</p>
 				</div>
 				<p className="divider">&nbsp;</p>
 				<div className="card-expenses">
 					<p>Expenses</p>
 					<p style={{ fontSize: "x-large", color: "#e74c3c" }}>
-						KES: {totalExpenses}
+						KES: {new Intl.NumberFormat().format(totalExpenses)}
 					</p>
 				</div>
 			</div>

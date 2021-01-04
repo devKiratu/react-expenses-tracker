@@ -10,13 +10,13 @@ export default function History({ transaction }) {
 					item.type === "income" ? (
 						<IncomeTransaction
 							name={item.name}
-							amount={item.amount}
+							amount={new Intl.NumberFormat().format(item.amount.toFixed(2))}
 							key={item.id}
 						/>
 					) : (
 						<ExpenseTransaction
 							name={item.name}
-							amount={item.amount}
+							amount={new Intl.NumberFormat().format(item.amount.toFixed(2))}
 							key={item.id}
 						/>
 					)

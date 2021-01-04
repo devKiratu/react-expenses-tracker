@@ -30,19 +30,23 @@ export function AddIncome({
 
 	function handleSubmit(e) {
 		e.preventDefault();
-		setTransaction((prev) => [
-			...prev,
-			{
-				name: incomeName,
-				amount: parseFloat(incomeAmount),
-				type: "income",
-				id: Date.now(),
-			},
-		]);
+		if (!incomeName || !incomeAmount) {
+			alert("Both Income name and amount are required");
+		} else {
+			setTransaction((prev) => [
+				...prev,
+				{
+					name: incomeName,
+					amount: parseFloat(incomeAmount),
+					type: "income",
+					id: Date.now(),
+				},
+			]);
 
-		setIncomeName("");
-		setIncomeAmount("");
-		inputIncome.current.focus();
+			setIncomeName("");
+			setIncomeAmount("");
+			inputIncome.current.focus();
+		}
 	}
 
 	useEffect(() => {
@@ -71,7 +75,7 @@ export function AddIncome({
 							/>
 							<label htmlFor="amount">Amount</label>
 							<input
-								type="text"
+								type="number"
 								placeholder="e.g 50000"
 								name="amount"
 								value={incomeAmount}
@@ -106,19 +110,23 @@ export function AddExpense({
 
 	function handleSubmit(e) {
 		e.preventDefault();
-		setTransaction((prev) => [
-			...prev,
-			{
-				name: expenseName,
-				amount: parseFloat(expenseAmount),
-				type: "expense",
-				id: Date.now(),
-			},
-		]);
+		if (!expenseName || !expenseAmount) {
+			alert("Both Income name and amount are required");
+		} else {
+			setTransaction((prev) => [
+				...prev,
+				{
+					name: expenseName,
+					amount: parseFloat(expenseAmount),
+					type: "expense",
+					id: Date.now(),
+				},
+			]);
 
-		setExpenseName("");
-		setExpenseAmount("");
-		inputExpense.current.focus();
+			setExpenseName("");
+			setExpenseAmount("");
+			inputExpense.current.focus();
+		}
 	}
 
 	useEffect(() => {
@@ -147,7 +155,7 @@ export function AddExpense({
 							/>
 							<label htmlFor="amount">Amount</label>
 							<input
-								type="text"
+								type="number"
 								placeholder="e.g 500"
 								name="amount"
 								value={expenseAmount}

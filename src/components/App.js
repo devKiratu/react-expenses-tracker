@@ -20,14 +20,16 @@ export default function App() {
 				.slice()
 				.filter((item) => item.type === "expense")
 				.reduce((acc, val) => acc + val.amount, 0)
+				.toFixed(2)
 		);
 		setTotalIncome(
 			transaction
 				.slice()
 				.filter((item) => item.type === "income")
 				.reduce((acc, val) => acc + val.amount, 0)
+				.toFixed(2)
 		);
-		setBalance(totalIncome - totalExpenses);
+		setBalance((totalIncome - totalExpenses).toFixed(2));
 	}, [transaction, totalExpenses, totalIncome]);
 
 	return (
