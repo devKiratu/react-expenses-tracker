@@ -1,6 +1,6 @@
 # Expenses Tracker App
 
-Made with React hooks and Context API
+Made with React hooks and Context API + useReducer for shared global management
 
 See the [live app here](https://react-xpenses-tracker.netlify.app/)
 
