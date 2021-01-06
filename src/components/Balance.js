@@ -1,11 +1,24 @@
-import React from "react";
+import React, { useContext } from "react";
+import { GlobalContext } from "../context/GlobalState";
 
-export default function Balance({
-	balance,
-	setBalance,
-	totalIncome,
-	totalExpenses,
-}) {
+export default function Balance() {
+	const [state] = useContext(GlobalContext);
+	const { transactions } = state;
+
+	const totalIncome = transactions
+		.slice()
+		.filter((item) => item.type === "income")
+		.reduce((acc, val) => acc + val.amount, 0)
+		.toFixed(2);
+
+	const totalExpenses = transactions
+		.slice()
+		.filter((item) => item.type === "expense")
+		.reduce((acc, val) => acc + val.amount, 0)
+		.toFixed(2);
+
+	const balance = (totalIncome - totalExpenses).toFixed(2);
+
 	return (
 		<div>
 			<div className="your-balance">

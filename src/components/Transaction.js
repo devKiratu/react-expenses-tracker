@@ -1,29 +1,8 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useContext } from "react";
+import { GlobalContext } from "../context/GlobalState";
 
-export function IncomeTransaction({ name, amount }) {
-	return (
-		<div className="income-trans">
-			<p>{name}</p>
-			<p>{amount}</p>
-		</div>
-	);
-}
-
-export function ExpenseTransaction({ name, amount }) {
-	return (
-		<div className="expense-trans">
-			<p>{name}</p>
-			<p>{amount}</p>
-		</div>
-	);
-}
-
-export function AddIncome({
-	addIncome,
-	setAddIncome,
-	transaction,
-	setTransaction,
-}) {
+export function AddIncome() {
+	const [state, dispatch] = useContext(GlobalContext);
 	const [incomeName, setIncomeName] = useState("");
 	const [incomeAmount, setIncomeAmount] = useState("");
 	const inputIncome = useRef(null);
@@ -33,15 +12,15 @@ export function AddIncome({
 		if (!incomeName || !incomeAmount) {
 			alert("Both Income name and amount are required");
 		} else {
-			setTransaction((prev) => [
-				...prev,
-				{
+			dispatch({
+				type: "ADD_TRANSACTION",
+				payload: {
 					name: incomeName,
 					amount: parseFloat(incomeAmount),
 					type: "income",
 					id: Date.now(),
 				},
-			]);
+			});
 
 			setIncomeName("");
 			setIncomeAmount("");
@@ -50,16 +29,16 @@ export function AddIncome({
 	}
 
 	useEffect(() => {
-		if (addIncome) {
+		if (state.addIncome) {
 			inputIncome.current.focus();
 		} else {
 			return;
 		}
-	}, [addIncome]);
+	}, [state.addIncome]);
 
 	return (
 		<>
-			{addIncome ? (
+			{state.addIncome ? (
 				<div className="modal">
 					<div className="modal-content">
 						<p>Enter your income details</p>
@@ -85,7 +64,12 @@ export function AddIncome({
 						</form>
 						<button
 							className="exit-modal"
-							onClick={() => setAddIncome(!addIncome)}
+							onClick={() =>
+								dispatch({
+									type: "OPEN_ADD_INCOME",
+									payload: !state.addIncome,
+								})
+							}
 						>
 							Finish
 						</button>
@@ -98,12 +82,8 @@ export function AddIncome({
 	);
 }
 
-export function AddExpense({
-	addExpense,
-	setAddExpense,
-	transaction,
-	setTransaction,
-}) {
+export function AddExpense() {
+	const [state, dispatch] = useContext(GlobalContext);
 	const [expenseName, setExpenseName] = useState("");
 	const [expenseAmount, setExpenseAmount] = useState("");
 	const inputExpense = useRef(null);
@@ -113,15 +93,15 @@ export function AddExpense({
 		if (!expenseName || !expenseAmount) {
 			alert("Both Income name and amount are required");
 		} else {
-			setTransaction((prev) => [
-				...prev,
-				{
+			dispatch({
+				type: "ADD_TRANSACTION",
+				payload: {
 					name: expenseName,
 					amount: parseFloat(expenseAmount),
 					type: "expense",
 					id: Date.now(),
 				},
-			]);
+			});
 
 			setExpenseName("");
 			setExpenseAmount("");
@@ -130,16 +110,16 @@ export function AddExpense({
 	}
 
 	useEffect(() => {
-		if (addExpense) {
+		if (state.addExpense) {
 			inputExpense.current.focus();
 		} else {
 			return;
 		}
-	}, [addExpense]);
+	}, [state.addExpense]);
 
 	return (
 		<>
-			{addExpense ? (
+			{state.addExpense ? (
 				<div className="modal">
 					<div className="modal-content">
 						<p style={{ color: "#e74c3c" }}>Enter your expense details</p>
@@ -173,7 +153,12 @@ export function AddExpense({
 						<button
 							className="exit-modal"
 							style={{ border: "2px solid #e74c3c", color: "#e74c3c" }}
-							onClick={() => setAddExpense(!addExpense)}
+							onClick={() =>
+								dispatch({
+									type: "OPEN_ADD_EXPENSE",
+									payload: !state.addExpense,
+								})
+							}
 						>
 							Finish
 						</button>

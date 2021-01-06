@@ -1,12 +1,33 @@
-import React from "react";
-import { IncomeTransaction, ExpenseTransaction } from "./Transaction";
+import React, { useContext } from "react";
+import { GlobalContext } from "../context/GlobalState";
 
-export default function History({ transaction }) {
+export function IncomeTransaction({ name, amount }) {
+	return (
+		<div className="income-trans">
+			<p>{name}</p>
+			<p>{amount}</p>
+		</div>
+	);
+}
+
+export function ExpenseTransaction({ name, amount }) {
+	return (
+		<div className="expense-trans">
+			<p>{name}</p>
+			<p>{amount}</p>
+		</div>
+	);
+}
+
+export default function History() {
+	const [state] = useContext(GlobalContext);
+	const { transactions } = state;
+
 	return (
 		<div className="history-card">
 			<p className="history-card-title">History</p>
 			<div className="history-card-content">
-				{transaction.map((item) =>
+				{transactions.map((item) =>
 					item.type === "income" ? (
 						<IncomeTransaction
 							name={item.name}
