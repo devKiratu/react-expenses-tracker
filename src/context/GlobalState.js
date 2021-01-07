@@ -20,9 +20,7 @@ function reducer(state, action) {
 		case "DELETE_TRANSACTION":
 			return {
 				...state,
-				transactions: state.transactions.filter(
-					(transaction) => transaction.id !== action.payload
-				),
+				transactions: [...action.payload],
 			};
 		case "OPEN_ADD_INCOME":
 			return {
@@ -37,7 +35,7 @@ function reducer(state, action) {
 		case "LOCAL_STORAGE_VALUES":
 			return {
 				...state,
-				transactions: [...state.transactions, ...action.payload],
+				transactions: [...action.payload],
 			};
 		default:
 			return state;
@@ -61,7 +59,7 @@ export function GlobalProvider({ children }) {
 
 	function getLocalItems() {
 		let storedSheet = JSON.parse(localStorage.getItem("balanceSheet"));
-		console.log("localStorage balanceSheet values are", storedSheet);
+		// console.log("localStorage balanceSheet values are", storedSheet);
 
 		dispatch({
 			type: "LOCAL_STORAGE_VALUES",

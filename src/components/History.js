@@ -5,9 +5,13 @@ export function IncomeTransaction({ name, amount, index }) {
 	const [state, dispatch] = useContext(GlobalContext);
 
 	function deleteTransaction(index) {
+		const updatedTransactions = state.transactions.filter(
+			(transaction) => transaction.id !== index
+		);
+
 		dispatch({
 			type: "DELETE_TRANSACTION",
-			payload: index,
+			payload: updatedTransactions,
 		});
 	}
 
@@ -28,9 +32,13 @@ export function ExpenseTransaction({ name, amount, index }) {
 	const [state, dispatch] = useContext(GlobalContext);
 
 	function deleteTransaction(index) {
+		const updatedTransactions = state.transactions.filter(
+			(transaction) => transaction.id !== index
+		);
+
 		dispatch({
 			type: "DELETE_TRANSACTION",
-			payload: index,
+			payload: updatedTransactions,
 		});
 	}
 	return (
