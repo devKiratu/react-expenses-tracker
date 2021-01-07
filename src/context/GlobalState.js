@@ -48,9 +48,14 @@ export const GlobalContext = createContext(initialState);
 export function GlobalProvider({ children }) {
 	const [state, dispatch] = useReducer(reducer, initialState);
 
+	useEffect(() => {
+		localStorage.setItem("balanceSheet", JSON.stringify(state.transactions));
+	}, [state.transactions]);
+
 	function getLocalItems() {
 		let storedSheet = JSON.parse(localStorage.getItem("balanceSheet"));
-		console.log(storedSheet);
+		console.log("localStorage balanceSheet values are", storedSheet);
+
 		dispatch({
 			type: "LOCAL_STORAGE_VALUES",
 			payload: storedSheet,
@@ -60,10 +65,6 @@ export function GlobalProvider({ children }) {
 	useEffect(() => {
 		getLocalItems();
 	}, []);
-
-	useEffect(() => {
-		localStorage.setItem("balanceSheet", JSON.stringify(state.transactions));
-	}, [state.transactions]);
 
 	return (
 		<GlobalContext.Provider value={[state, dispatch]}>
