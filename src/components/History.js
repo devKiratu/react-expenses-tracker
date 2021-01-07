@@ -1,20 +1,47 @@
 import React, { useContext } from "react";
 import { GlobalContext } from "../context/GlobalState";
 
-export function IncomeTransaction({ name, amount }) {
+export function IncomeTransaction({ name, amount, index }) {
+	const [state, dispatch] = useContext(GlobalContext);
+
+	function deleteTransaction(index) {
+		dispatch({
+			type: "DELETE_TRANSACTION",
+			payload: index,
+		});
+	}
+
 	return (
 		<div className="income-trans">
-			<p>{name}</p>
-			<p>{amount}</p>
+			<div className="transaction-row">
+				<button className="deleteBtn" onClick={() => deleteTransaction(index)}>
+					❌
+				</button>
+				<p>{name}</p>
+				<p>{amount}</p>
+			</div>
 		</div>
 	);
 }
 
-export function ExpenseTransaction({ name, amount }) {
+export function ExpenseTransaction({ name, amount, index }) {
+	const [state, dispatch] = useContext(GlobalContext);
+
+	function deleteTransaction(index) {
+		dispatch({
+			type: "DELETE_TRANSACTION",
+			payload: index,
+		});
+	}
 	return (
 		<div className="expense-trans">
-			<p>{name}</p>
-			<p>{amount}</p>
+			<div className="transaction-row">
+				<button className="deleteBtn" onClick={() => deleteTransaction(index)}>
+					❌
+				</button>
+				<p>{name}</p>
+				<p>{amount}</p>
+			</div>
 		</div>
 	);
 }
@@ -33,12 +60,14 @@ export default function History() {
 							name={item.name}
 							amount={new Intl.NumberFormat().format(item.amount.toFixed(2))}
 							key={item.id}
+							index={item.id}
 						/>
 					) : (
 						<ExpenseTransaction
 							name={item.name}
 							amount={new Intl.NumberFormat().format(item.amount.toFixed(2))}
 							key={item.id}
+							index={item.id}
 						/>
 					)
 				)}
