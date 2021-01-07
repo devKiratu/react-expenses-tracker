@@ -48,9 +48,9 @@ export const GlobalContext = createContext(initialState);
 export function GlobalProvider({ children }) {
 	const [state, dispatch] = useReducer(reducer, initialState);
 
-	useEffect(() => {
+	function setLocalItems() {
 		localStorage.setItem("balanceSheet", JSON.stringify(state.transactions));
-	}, [state.transactions]);
+	}
 
 	function getLocalItems() {
 		let storedSheet = JSON.parse(localStorage.getItem("balanceSheet"));
@@ -63,8 +63,21 @@ export function GlobalProvider({ children }) {
 	}
 
 	useEffect(() => {
-		getLocalItems();
+		const localItems = JSON.parse(localStorage.getItem("balanceSheet"));
+		if (localItems === null) {
+			setLocalItems();
+			getLocalItems();
+		} else {
+			getLocalItems();
+		}
+
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
+
+	useEffect(() => {
+		setLocalItems();
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [state.transactions]);
 
 	return (
 		<GlobalContext.Provider value={[state, dispatch]}>
